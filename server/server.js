@@ -3,7 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-require('dotenv').config({ override: true });
+require('@dotenvx/dotenvx').config({ override: true });
 
 const app = express();
 app.use(cors());
