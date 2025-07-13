@@ -36,7 +36,7 @@ const RoomIDForm = () => {
     try {
       const uid = sessionStorage.getItem("uid");
 
-      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/login`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
