@@ -23,6 +23,8 @@ const users = {};         // { socket.id: { uid, username, room } }
 const roomUsers = {};     // { room: [ { uid, username } ] }
 const roomMessages = {};  // { room: [messages] }
 
+console.log(process.env.CLIENT_URL);
+
 // ✅ HTTP route to login and get JWT
 app.post('/login', (req, res) => {
   const { uid, username } = req.body;
