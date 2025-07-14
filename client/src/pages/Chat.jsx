@@ -28,7 +28,6 @@ const Chat = () => {
 
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
       autoConnect: false,
-      transports: ["websocket"],
       secure: true,
       withCredentials: true,
     });
