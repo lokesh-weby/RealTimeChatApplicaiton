@@ -9,14 +9,6 @@ const RoomIDForm = () => {
     roomId: "",
   });
 
-  // Check for uid in sessionStorage or generate one
-  useEffect(() => {
-    if (!sessionStorage.getItem("uid")) {
-      const uid = uuidv4().split("-")[0];
-      sessionStorage.setItem("uid", uid);
-    }
-  }, []);
-
   const handleChange = (e) => {
     const { id, value } = e.target;
     setData((prev) => ({
@@ -27,6 +19,9 @@ const RoomIDForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const uid = uuidv4().split("-")[0];
+      sessionStorage.setItem("uid", uid);
 
     if (!data.username || !data.roomId) {
       alert("Please enter both username and room");

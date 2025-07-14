@@ -14,6 +14,9 @@ const Chat = () => {
   const uid = sessionStorage.getItem("uid");
   const token = sessionStorage.getItem("token");
 
+  console.log(import.meta.env.VITE_SOCKET_URL);
+  // console.log(import.meta.env.VITE_SOCKET_URL);
+  console.log(import.meta.env.VITE_SERVER_URL);
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
@@ -23,7 +26,7 @@ const Chat = () => {
   useEffect(() => {
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
       autoConnect: false,
-      transports: ["websocket"], 
+      transports: ["websocket"],
       secure: true,
       withCredentials: true,
     });
