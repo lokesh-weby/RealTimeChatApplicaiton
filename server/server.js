@@ -22,7 +22,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // In-memory data stores
 const users = {};         // { socket.id: { uid, username, room } }
 const roomUsers = {};     // { room: [ { uid, username } ] }
-const roomMessages = {};  // { room: [messages] }
+
 
 console.log(process.env.CLIENT_URL);
 
@@ -74,7 +74,6 @@ io.on('connection', (socket) => {
       createdAt: new Date()
     };
 
-    roomMessages[room].push(joinMsg);
     socket.to(room).emit('receiveMessage', joinMsg);
     io.to(room).emit('activeUsers', roomUsers[room]);
   });
@@ -91,9 +90,8 @@ io.on('connection', (socket) => {
       createdAt: new Date()
     };
 
-    // roomMessages[room].push(message);
     io.to(room).emit('receiveMessage', message);
-    socket.emit('previousMessages', roomMessages[room] || []);
+
   });
 
   socket.on('disconnect', () => {
@@ -114,13 +112,12 @@ io.on('connection', (socket) => {
         createdAt: new Date()
       };
 
-      // roomMessages[room].push(leaveMsg);
       socket.to(room).emit('receiveMessage', leaveMsg);
     }
   });
 });
 
-// Health check
+// test
 app.get('/', (req, res) => {
   res.send("Socket.IO Chat Server with JWT Auth (POST login)");
 });
