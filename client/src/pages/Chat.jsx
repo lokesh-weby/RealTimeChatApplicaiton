@@ -24,7 +24,7 @@ const Chat = () => {
   }, [messages]); // <- triggered every time messages change
 
   useEffect(() => {
-      console.log("Socket URL",import.meta.env.VITE_SERVER_URL);
+      console.log("Socket URL",import.meta.env.VITE_SOCKET_URL);
 
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
       transports: ["websocket", "polling"],
