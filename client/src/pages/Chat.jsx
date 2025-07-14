@@ -14,9 +14,9 @@ const Chat = () => {
   const uid = sessionStorage.getItem("uid");
   const token = sessionStorage.getItem("token");
 
-  console.log(import.meta.env.VITE_SOCKET_URL);
   // console.log(import.meta.env.VITE_SOCKET_URL);
-  console.log(import.meta.env.VITE_SERVER_URL);
+  // console.log(import.meta.env.VITE_SOCKET_URL);
+
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
@@ -24,6 +24,8 @@ const Chat = () => {
   }, [messages]); // <- triggered every time messages change
 
   useEffect(() => {
+      console.log("Socket URL",import.meta.env.VITE_SERVER_URL);
+
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
       autoConnect: false,
       transports: ["websocket"],
@@ -33,6 +35,16 @@ const Chat = () => {
 
     socket.auth = { token };
     socket.connect();
+
+    socket.on("connect", () => {
+      console.log("✅ Connected to socket:", socket.id);
+      socket.emit("joinRoom", { uid, username, room });
+    });
+
+    socket.on("connect_error", (err) => {
+      console.error("❌ Socket connect error:", err.message);
+    });
+
 
     socket.emit("joinRoom", { uid, username, room });
 
