@@ -68,8 +68,6 @@ io.on('connection', (socket) => {
       roomUsers[room].push({ uid, username });
     }
 
-    if (!roomMessages[room]) roomMessages[room] = [];
-
     const joinMsg = {
       sender: 'Server',
       text: `${username} joined the room`,
@@ -93,7 +91,7 @@ io.on('connection', (socket) => {
       createdAt: new Date()
     };
 
-    roomMessages[room].push(message);
+    // roomMessages[room].push(message);
     io.to(room).emit('receiveMessage', message);
     socket.emit('previousMessages', roomMessages[room] || []);
   });
@@ -116,7 +114,7 @@ io.on('connection', (socket) => {
         createdAt: new Date()
       };
 
-      roomMessages[room].push(leaveMsg);
+      // roomMessages[room].push(leaveMsg);
       socket.to(room).emit('receiveMessage', leaveMsg);
     }
   });

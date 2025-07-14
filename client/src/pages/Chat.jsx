@@ -36,14 +36,7 @@ const Chat = () => {
     socket.auth = { token };
     socket.connect();
 
-    socket.on("connect", () => {
-      console.log("✅ Connected to socket:", socket.id);
-      socket.emit("joinRoom", { uid, username, room });
-    });
 
-    socket.on("connect_error", (err) => {
-      console.log("❌ Socket connect error:", err);
-    });
 
 
     socket.emit("joinRoom", { uid, username, room });
