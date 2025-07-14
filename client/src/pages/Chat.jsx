@@ -41,7 +41,7 @@ const Chat = () => {
     });
 
     socket.on("connect_error", (err) => {
-      console.error("❌ Socket connect error:", err.message);
+      console.log("❌ Socket connect error:", err);
     });
 
 
