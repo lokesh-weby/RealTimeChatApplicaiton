@@ -23,6 +23,9 @@ const Chat = () => {
   useEffect(() => {
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
       autoConnect: false,
+      transports: ["websocket"], 
+      secure: true,
+      withCredentials: true,
     });
 
     socket.auth = { token };
@@ -68,11 +71,15 @@ const Chat = () => {
           <i className="fa-solid fa-xmark"></i>
         </button>
         <div className="my-10 h-2/3 overflow-y-auto flex-col gap-y-5">
-          <h1 className="my-6 text-sm">{`Room: ${sessionStorage.getItem('roomId')}`}</h1>
+          <h1 className="my-6 text-sm">{`Room: ${sessionStorage.getItem(
+            "roomId"
+          )}`}</h1>
           <h1 className="my-6 text-xl">Members</h1>
-          <ol  className="list-decimal pl-5 space-y-2">
+          <ol className="list-decimal pl-5 space-y-2">
             {activeUsers?.map((user, index) => (
-              <li key={index} className="text-lg my-4 md:text-xl">{user.username}</li>
+              <li key={index} className="text-lg my-4 md:text-xl">
+                {user.username}
+              </li>
             ))}
           </ol>
         </div>
