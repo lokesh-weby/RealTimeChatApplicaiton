@@ -27,6 +27,7 @@ const Chat = () => {
       console.log("Socket URL",import.meta.env.VITE_SERVER_URL);
 
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
+      transports: ["websocket", "polling"],
       autoConnect: false,
       secure: true,
      
